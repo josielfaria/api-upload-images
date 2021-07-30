@@ -17,9 +17,9 @@ jobs:
           php artisan config:cache
           php artisan view:cache
 
-      - name: 🎲 Update BD
-        run: |
-          php artisan migrate --force
+      # - name: 🎲 Update BD
+      #   run: |
+      #     php artisan migrate --force
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
