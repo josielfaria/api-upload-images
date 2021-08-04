@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UploadImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -10,14 +8,14 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', 'AuthController@login')->name('login');
 
 Route::group(['middleware' => 'apiJwt',], function ($router) {
   // CONTROLE DE ACESSO
-  Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-  Route::post('refresh', [AuthController::class, 'refresh'])->name('logout'); // refresh token
-  Route::post('logged', [AuthController::class, 'logged'])->name('logged'); // who are logged
+  Route::post('logged', 'AuthController@logged')->name('logged'); // who are logged
+  Route::post('logout', 'AuthController@logout')->name('logout');
+  Route::post('refresh', 'AuthController@refresh')->name('refresh'); // refresh token
 
   // ADICIONE SUAS ROTAS
-  Route::resource('upload-images', UploadImagesController::class, ['only' => ['index', 'store']]);
+  Route::resource('upload-images', 'UploadImagesController', ['only' => ['index', 'store']]);
 });
